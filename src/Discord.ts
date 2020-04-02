@@ -131,14 +131,17 @@ class Discord {
     return message
   }
 
-  private makeDiscordWebhook (username: string, message: string) {
+  private async makeDiscordWebhook (username: string, message: string) {
     message = this.replaceDiscordMentions(message)
+
 
     let avatarURL
     if (username === this.config.SERVER_NAME + ' - Server') { // use avatar for the server
       avatarURL = this.config.SERVER_IMAGE || 'https://minotar.net/helm/Steve/256.png'
     } else { // use avatar for player
-      avatarURL = `https://minotar.net/helm/${username}/256.png`
+	  let uuid = await axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`);
+	  const { data } = uuid;
+      avatarURL = `https://visage.surgeplay.com/face/${data.id}.png`
     }
 
     return {
@@ -158,7 +161,7 @@ class Discord {
 
   public async sendMessage (username: string, message: string) {
     if (this.config.USE_WEBHOOKS) {
-      const webhook = this.makeDiscordWebhook(username, message)
+      const webhook = await this.makeDiscordWebhook(username, message)
       try {
         await axios.post(this.config.WEBHOOK_URL, webhook, { headers: { 'Content-Type': 'application/json' } })
       } catch (e) {
