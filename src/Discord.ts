@@ -48,13 +48,49 @@ class Discord {
     }
   }
 
+  private parseDiscordWebhook (url: string) {
+    const re = /discordapp.com\/api\/webhooks\/([^\/]+)\/([^\/]+)/
+
+    // the is of the webhook
+    let id = null
+    let token = null
+
+    if (!re.test(url)) {
+      // In case the url changes at some point, I will warn if it still works
+      console.log('[WARN] The Webhook URL may not be valid!')
+    } else {
+      const match = url.match(re)
+      if (match) {
+        id = match[1]
+        token = match[2]
+      }
+    }
+
+    return { id, token }
+  }
+
   private async onMessage (message: Message) {
     // no channel, done
     if (!this.channel) return
     // don't want to check other channels
     if (message.channel.id !== this.channel || message.channel.type !== 'text') return
     // if using webhooks, ignore this!
-    if (this.config.USE_WEBHOOKS && message.webhookID) return
+    if (message.webhookID) {
+      // backwards compatability with older config
+      if (this.config.USE_WEBHOOKS && this.config.IGNORE_WEBHOOKS === undefined) return
+
+      // if ignoring all webhooks, ignore
+      if (this.config.IGNORE_WEBHOOKS) {
+        return
+      } else if (this.config.USE_WEBHOOKS) {
+        // otherwise, ignore all webhooks that are not the same as this one
+        const { id } = this.parseDiscordWebhook(this.config.WEBHOOK_URL)
+        if (id === message.webhookID) {
+          if (this.config.DEBUG) console.log('[INFO] Ignoring webhook from self')
+          return
+        }
+      }
+    }
     // if the same user as the bot, ignore
     if (message.author.id === this.client.user.id) return
     // ignore any attachments
@@ -81,6 +117,8 @@ class Discord {
       command = `/tellraw @a ${this.makeMinecraftTellraw(message)}`
     }
 
+    if (this.config.DEBUG) console.log(`[DEBUG] Sending command "${command}" to the server`)
+
     if (command) {
       await rcon.command(command).catch((e) => {
         console.log('[ERROR] Could not send command!')
@@ -91,11 +129,15 @@ class Discord {
   }
 
   private makeMinecraftTellraw(message: Message): string {
-    const username = emojiStrip(message.author.username)
-    const discriminator = message.author.discriminator
-    const text = emojiStrip(message.cleanContent)
+    const variables: {[index: string]: string} = {
+      username: emojiStrip(message.author.username),
+      discriminator: message.author.discriminator,
+      text: emojiStrip(message.cleanContent)
+    }
     // hastily use JSON to encode the strings
-    const variables = JSON.parse(JSON.stringify({ username, discriminator, text }))
+    for (const v of Object.keys(variables)) {
+      variables[v] = JSON.stringify(variables[v]).slice(1,-1)
+    }
 
     return this.config.MINECRAFT_TELLRAW_TEMPLATE
       .replace('%username%', variables.username)
