@@ -131,6 +131,7 @@ class Discord {
   private makeMinecraftTellraw(message: Message): string {
     const variables: {[index: string]: string} = {
       username: emojiStrip(message.author.username),
+      nickname: message.member.nickname ? emojiStrip(message.member.nickname) : emojiStrip(message.author.username),
       discriminator: message.author.discriminator,
       text: emojiStrip(message.cleanContent)
     }
@@ -140,13 +141,14 @@ class Discord {
     }
 
     return this.config.MINECRAFT_TELLRAW_TEMPLATE
-      .replace('%username%', variables.username)
-      .replace('%discriminator%', variables.discriminator)
-      .replace('%message%', variables.text)
+      .replace(/%username%/g, variables.username)
+      .replace(/%nickname%/g, variables.nickname)
+      .replace(/%discriminator%/g, variables.discriminator)
+      .replace(/%message%/g, variables.text)
   }
 
   private replaceDiscordMentions(message: string): string {
-    const possibleMentions = message.match(/@(\S+)/gim)
+    const possibleMentions = message.match(/@[^#\s]*[#]?[0-9]{4}/gim)
     if (possibleMentions) {
       for (let mention of possibleMentions) {
         const mentionParts = mention.split('#')
