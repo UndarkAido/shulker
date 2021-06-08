@@ -2,27 +2,27 @@
     "PORT": 8000,
 
     "USE_WEBHOOKS": true,
-    "WEBHOOK_URL": "DISCORD_WEBHOOK_URL_HERE",
-    "IGNORE_WEBHOOKS": true,
-    "DISCORD_TOKEN": "TOKEN_HERE",
-    "DISCORD_CHANNEL_ID": "",
-    "DISCORD_CHANNEL_NAME": "#bot",
+    "WEBHOOK_URL": "https://discordapp.com/api/webhooks/694063429715230753/gMfX0vwkGCk23D2ooug4MUXjYNBXMd76wbI3LBNAVJ0QltSylUc8u4lCfUUWjMs0tjiO",
+    "IGNORE_WEBHOOKS": false,
+    "DISCORD_TOKEN": "Njk1MDk4ODY3NTUyNzQ3NTIw.XoVX8g.s0KVgY0acvhGfkZdt76KkSd5BQo",
+    "DISCORD_CHANNEL_ID": "693606397803233312",
+    "DISCORD_CHANNEL_NAME": "#vanilla",
     "DISCORD_MESSAGE_TEMPLATE": "`%username%`: %message%",
 
-    "MINECRAFT_SERVER_RCON_IP": "127.0.0.1",
+    "MINECRAFT_SERVER_RCON_IP": "192.168.1.34",
     "MINECRAFT_SERVER_RCON_PORT": 25575,
-    "MINECRAFT_SERVER_RCON_PASSWORD": "password",
+    "MINECRAFT_SERVER_RCON_PASSWORD": "adminkf2ea8HL",
     "MINECRAFT_TELLRAW_TEMPLATE": "[{\"color\": \"white\", \"text\": \"<%username%> %message%\"}]",
 
-    "IS_LOCAL_FILE": false,
-    "LOCAL_FILE_PATH": "/usr/home/minecraft_server/logs/latest.log",
+    "IS_LOCAL_FILE": true,
+    "LOCAL_FILE_PATH": "/home/lgsm/serverfiles-family-vanilla/logs/latest.log",
 
     "SHOW_INIT_MESSAGE": true,
 
-    "ALLOW_USER_MENTIONS": false,
-    "ALLOW_HERE_EVERYONE_MENTIONS": false,
-    "ALLOW_SLASH_COMMANDS": false,
-    "SLASH_COMMAND_ROLES": [],
+    "ALLOW_USER_MENTIONS": true,
+    "ALLOW_HERE_EVERYONE_MENTIONS": true,
+    "ALLOW_SLASH_COMMANDS": true,
+    "SLASH_COMMAND_ROLES": ["Vanilla Admin"],
 
     "WEBHOOK": "/minecraft/hook",
     "REGEX_SERVER_PREFIX": "\\[Server thread/INFO\\]:",
@@ -30,12 +30,12 @@
     "REGEX_IGNORED_CHAT": "packets too frequently",
     "DEBUG": false,
 
-    "SERVER_NAME": "Shulker",
-    "SERVER_IMAGE": "",
-    "SHOW_PLAYER_CONN_STAT": false,
-    "SHOW_PLAYER_ADVANCEMENT": false,
-    "SHOW_PLAYER_DEATH": false,
-    "SHOW_PLAYER_ME": false,
+    "SERVER_NAME": "Vanilla",
+    "SERVER_IMAGE": "http://server.theundarkpixel.com/minecraft/grassshulkerface.png",
+    "SHOW_PLAYER_CONN_STAT": true,
+    "SHOW_PLAYER_ADVANCEMENT": true,
+    "SHOW_PLAYER_DEATH": true,
+    "SHOW_PLAYER_ME": true,
     "DEATH_KEY_WORDS": ["shot", "fell", "death", "died", "doomed", "pummeled", "removed", "didn't want", "withered", "squashed", "flames", "burnt", "walked into", "bang", "roasted", "squished", "drowned", "killed", "slain", "blown", "blew", "suffocated", "struck", "lava", "impaled", "speared", "fireballed", "finished", "kinetic"]
 }
 
