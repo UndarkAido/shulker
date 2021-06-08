@@ -13,6 +13,8 @@
     "MINECRAFT_SERVER_RCON_PORT": 25575,
     "MINECRAFT_SERVER_RCON_PASSWORD": "adminkf2ea8HL",
     "MINECRAFT_TELLRAW_TEMPLATE": "[{\"color\": \"white\", \"text\": \"<%username%> %message%\"}]",
+    "MINECRAFT_TELLRAW_DOESNT_EXIST": false,
+    "MINECRAFT_TELLRAW_DOESNT_EXIST_SAY_TEMPLATE": "<%username%> %message%",
 
     "IS_LOCAL_FILE": true,
     "LOCAL_FILE_PATH": "/home/lgsm/serverfiles-family-vanilla/logs/latest.log",
@@ -32,10 +34,12 @@
 
     "SERVER_NAME": "Vanilla",
     "SERVER_IMAGE": "http://server.theundarkpixel.com/minecraft/grassshulkerface.png",
+    "SHOW_SERVER_STATUS": true,
     "SHOW_PLAYER_CONN_STAT": true,
     "SHOW_PLAYER_ADVANCEMENT": true,
     "SHOW_PLAYER_DEATH": true,
     "SHOW_PLAYER_ME": true,
+    
     "DEATH_KEY_WORDS": ["shot", "fell", "death", "died", "doomed", "pummeled", "removed", "didn't want", "withered", "squashed", "flames", "burnt", "walked into", "bang", "roasted", "squished", "drowned", "killed", "slain", "blown", "blew", "suffocated", "struck", "lava", "impaled", "speared", "fireballed", "finished", "kinetic"]
 }
 
