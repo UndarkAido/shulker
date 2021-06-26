@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/destruc7i0n/shulker#readme",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "discord.js": "^11.6.1",
     "emoji-strip": "^1.0.1",
     "express": "^4.17.1",
